@@ -71,7 +71,6 @@ npm run dev
 │   ├── types/         # TypeScript definitions
 │   └── utils/         # Helper functions
 ├── docker/            # Docker configuration
-├── .env.example       # Environment variables template
 └── docker-compose.yml # Docker compose configuration
 ```
 

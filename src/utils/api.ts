@@ -53,10 +53,21 @@ const fetchNewsApiArticles = async (
 
     const queryParams = {
         apiKey: API_KEYS.newsapi,
-        q: params.searchTerm || '',
-        category: params.category || '',
+        q: params.searchTerm || 'news',
+        sources: params.category || '',
         from: buildDateQuery(params.date || ''),
-    };
+        pageSize: 10
+    } as { [key: string]: string | number }
+
+
+    // Check for category or categories and add the section property if needed
+    const category = params.category || (params.categories?.length ? params.categories.toString().toLowerCase() : '');
+    if (category) {
+        queryParams.sources = category;
+    } else {
+        delete queryParams.sources;
+    }
+
 
     try {
         const response = await axios.get(import.meta.env.VITE_NEWS_API_URL, { params: queryParams });
